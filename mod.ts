@@ -1,3 +1,6 @@
+// Copyright 2023-latest the httpland authors. All rights reserved. MIT license.
+// This module is browser compatible.
+
 import { isString, type Middleware, parseMediaType } from "./deps.ts";
 import { Header } from "./constants.ts";
 import { Minifier, withMinify } from "./downstream.ts";
