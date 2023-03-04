@@ -27,13 +27,13 @@ export const makeOptions = (version: string): BuildOptions => ({
       "response",
     ],
     license: "MIT",
-    homepage: "https://github.com/httpland/http-body-minify",
+    homepage: "https://github.com/httpland/http-content-minify",
     repository: {
       type: "git",
-      url: "git+https://github.com/httpland/http-body-minify.git",
+      url: "git+https://github.com/httpland/http-content-minify.git",
     },
     bugs: {
-      url: "https://github.com/httpland/http-body-minify/issues",
+      url: "https://github.com/httpland/http-content-minify/issues",
     },
     sideEffects: false,
     type: "module",
