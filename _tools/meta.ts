@@ -10,7 +10,7 @@ export const makeOptions = (version: string): BuildOptions => ({
   entryPoints: ["./mod.ts"],
   outDir: "./npm",
   package: {
-    name: "@httpland/http-minify",
+    name: "@httpland/http-body-minify",
     version,
     description:
       "HTTP body minification middleware for standard request and response",
@@ -25,13 +25,13 @@ export const makeOptions = (version: string): BuildOptions => ({
       "response",
     ],
     license: "MIT",
-    homepage: "https://github.com/httpland/http-minify",
+    homepage: "https://github.com/httpland/http-body-minify",
     repository: {
       type: "git",
-      url: "git+https://github.com/httpland/http-minify.git",
+      url: "git+https://github.com/httpland/http-body-minify.git",
     },
     bugs: {
-      url: "https://github.com/httpland/http-minify/issues",
+      url: "https://github.com/httpland/http-body-minify/issues",
     },
     sideEffects: false,
     type: "module",
