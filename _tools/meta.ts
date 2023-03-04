@@ -10,12 +10,14 @@ export const makeOptions = (version: string): BuildOptions => ({
   entryPoints: ["./mod.ts"],
   outDir: "./npm",
   package: {
-    name: "@httpland/http-body-minify",
+    name: "@httpland/http-content-minify",
     version,
     description:
-      "HTTP body minification middleware for standard request and response",
+      "HTTP message content minification middleware for standard request and response",
     keywords: [
       "http",
+      "message content",
+      "content",
       "body",
       "content-type",
       "middleware",

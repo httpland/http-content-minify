@@ -1,10 +1,11 @@
-# http-body-minify
+# http-content-minify
 
-HTTP body minification middleware for standard `Request` and `Response`.
+HTTP message content minification middleware for standard `Request` and
+`Response`.
 
 ## What
 
-Middleware for HTTP body minification.
+Middleware for HTTP message content(≒body, content) minification.
 
 Declaratively maps media types to transformers.
 
@@ -57,11 +58,11 @@ assertEquals(
 
 Middleware will effect following:
 
-- HTTP Body
+- HTTP content
 
 ## Conditions
 
-For safety, middleware is executed only if the following conditions are met:
+For safety, middleware will execute only if the following conditions are met:
 
 - The body text is readable
 - The `Content-Type` header exists
