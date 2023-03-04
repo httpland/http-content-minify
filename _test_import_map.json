@@ -1,5 +1,5 @@
 {
   "imports": {
-    "https://deno.land/x/http_minify@$VERSION/": "./"
+    "https://deno.land/x/http_content_minify@$VERSION/": "./"
   }
 }

@@ -10,11 +10,11 @@ export interface Manifest {
   readonly [mediaType: string]: Transformer;
 }
 
-/** HTTP body transform middleware factory.
+/** HTTP message content transform middleware factory.
  *
  * @example
  * ```ts
- * import minify from "https://deno.land/x/http_minify@$VERSION/mod.ts";
+ * import contentMinify from "https://deno.land/x/http_content_minify@$VERSION/mod.ts";
  * import { assertEquals } from "https://deno.land/std/testing/asserts.ts";
  *
  * interface Minifier {
@@ -24,7 +24,7 @@ export interface Manifest {
  * declare const minifyCss: Minifier;
  * declare const request: Request;
  *
- * const middleware = minify({
+ * const middleware = contentMinify({
  *   "text/javascript": minifyJs,
  *   "text/css": minifyCss,
  * });

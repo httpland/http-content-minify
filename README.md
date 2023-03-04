@@ -22,7 +22,7 @@ You map media type to transformer using whatever you like. The map is called a
 "manifest".
 
 ```ts
-import bodyMinify from "https://deno.land/x/http_minify@$VERSION/mod.ts";
+import contentMinify from "https://deno.land/x/http_content_minify@$VERSION/mod.ts";
 import { assertEquals } from "https://deno.land/std/testing/asserts.ts";
 
 interface Transformer {
@@ -32,7 +32,7 @@ declare const minifyJs: Transformer;
 declare const minifyCss: Transformer;
 declare const request: Request;
 
-const middleware = bodyMinify({
+const middleware = contentMinify({
   "text/javascript": minifyJs,
   "text/css": minifyCss,
 });
