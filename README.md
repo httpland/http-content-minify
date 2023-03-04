@@ -1,4 +1,4 @@
-# http-minify
+# http-body-minify
 
 HTTP body minification middleware for standard `Request` and `Response`.
 
@@ -6,7 +6,7 @@ HTTP body minification middleware for standard `Request` and `Response`.
 
 Middleware for HTTP body minification.
 
-Declaratively maps media types to minifiers.
+Declaratively maps media types to transformers.
 
 ## Middleware
 
@@ -17,21 +17,21 @@ For a definition of Universal HTTP middleware, see the
 
 Middleware factory is exported by default.
 
-You map media type to minifier using whatever you like. The map is called a
+You map media type to transformer using whatever you like. The map is called a
 "manifest".
 
 ```ts
-import minify from "https://deno.land/x/http_minify@$VERSION/mod.ts";
+import bodyMinify from "https://deno.land/x/http_minify@$VERSION/mod.ts";
 import { assertEquals } from "https://deno.land/std/testing/asserts.ts";
 
-interface Minifier {
-  (contents: ArrayBuffer): string | ArrayBuffer | Promise<string | ArrayBuffer>;
+interface Transformer {
+  (contents: ArrayBuffer): BodyInit | Promise<BodyInit>;
 }
-declare const minifyJs: Minifier;
-declare const minifyCss: Minifier;
+declare const minifyJs: Transformer;
+declare const minifyCss: Transformer;
 declare const request: Request;
 
-const middleware = minify({
+const middleware = bodyMinify({
   "text/javascript": minifyJs,
   "text/css": minifyCss,
 });
@@ -58,24 +58,20 @@ assertEquals(
 Middleware will effect following:
 
 - HTTP Body
-- HTTP Headers
-  - `Content-Length`
 
 ## Conditions
 
-For safety, middleware is executed only if the following conditions are met
+For safety, middleware is executed only if the following conditions are met:
 
 - The body text is readable
-- The `Content-type` header is present
-- The `Content-Encoding` header is **not present**
+- The `Content-Type` header exists
 - Media type matches the manifest
+- The `Content-Encoding` header **does not exist**
+- The `Content-Length` header **does not exist**
+- The `ETag` header **does not exist**
 
-Note that if the body is already compressed, it does nothing.
-
-In addition to changes to the body text due to minimization, the following
-effects are also present
-
-- The `Content-Length` header, if present, is set to a recalculated value.
+Note that middleware will not execute if there are already headers that would be
+affected by changes to the body.
 
 ## License
 

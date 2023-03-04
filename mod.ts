@@ -3,15 +3,14 @@
 
 import { isString, type Middleware, parseMediaType } from "./deps.ts";
 import { Header } from "./constants.ts";
-import { Minifier, withMinify } from "./downstream.ts";
-export { type Minifier } from "./downstream.ts";
+import { transformBody, type Transformer } from "./transform.ts";
 
-/** Media type and minifier map. */
+/** Media type and transformer map. */
 export interface Manifest {
-  readonly [mediaType: string]: Minifier;
+  readonly [mediaType: string]: Transformer;
 }
 
-/** HTTP body minification middleware factory.
+/** HTTP body transform middleware factory.
  *
  * @example
  * ```ts
@@ -47,7 +46,7 @@ export interface Manifest {
  * );
  * ```
  */
-export default function minify(manifest: Manifest): Middleware {
+export default function transform(manifest: Manifest): Middleware {
   return async (request, next) => {
     const response = await next(request);
     const contentTypeValue = response.headers.get(Header.ContentType);
@@ -55,10 +54,10 @@ export default function minify(manifest: Manifest): Middleware {
     if (!isString(contentTypeValue)) return response;
 
     const [mediaType] = parseMediaType(contentTypeValue);
-    const minifier = manifest[mediaType];
+    const transformer = manifest[mediaType];
 
-    if (!minifier) return response;
+    if (!transformer) return response;
 
-    return withMinify(response, minifier);
+    return transformBody(response, transformer);
   };
 }
